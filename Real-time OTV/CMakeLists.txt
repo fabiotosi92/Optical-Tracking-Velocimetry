@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.5.1)
+set (CMAKE_BUILD_TYPE Release)
+#set (CMAKE_BUILD_TYPE Debug)
+SET (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+add_definitions(-std=c++0x)
+project(river_flow_velocity_estimation)
+set( OpenCV_DIR "/usr/share/OpenCV" )
+set(OPENCV_ENABLE_NONFREE "Enable non-free algorithms" ON)
+find_package( OpenCV REQUIRED)
+#find_package( OpenMP REQUIRED)
+include_directories(include ${OpenCV_LIBRARIES} ${OpenCV_INCLUDE_DIRS} } ${catkin_INCLUDE_DIRS})
+
+#set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS} -mcpu=cortex-a53 -mfloat-abi=hard -funsafe-math-optimizations -mfpu=neon-fp-armv8")
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS} -mcpu=cortex-a53 -mfloat-abi=hard -funsafe-math-optimizations -mfpu=neon-fp-armv8")
+#set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+
+
+file(GLOB SOURCES "src/*.cpp")
+add_executable(river_flow_velocity_estimation ${SOURCES})
+target_link_libraries(river_flow_velocity_estimation opencv_nonfree ${OpenCV_LIBS} ${catkin_LIBRARIES})
